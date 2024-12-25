@@ -1,0 +1,6 @@
+1.フォルダ「.venv」の仮想環境をActivateする
+2.ターミナルで以下を実行
+pyinstaller main.py --name=SalarySlipScraper --icon=icon.ico --onefile
+3.フォルダ「dist」内(exeと同ディレクトリ)にファイル「settings.json」「readme.txt」を移動させる、
+4.フォルダ「dist」の名前を「SalarySlipScraper」に変更し、圧縮する
+5.フォルダ「build」を削除する
