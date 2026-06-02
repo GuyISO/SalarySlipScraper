@@ -1,0 +1,2062 @@
+
+<!-- saved from url=(0038)https://tfweb94.jp/kawasaki/servlet/RC -->
+<html class="ui-mobile"><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"><!--<base href="https://tfweb94.jp/kawasaki/servlet/RC">--><base href=".">
+<link rel="stylesheet" href="./川崎重工業グループ　電子明細_files/payadvice.css" type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.menu{
+    background-color:#666666;
+    color:#FF9900;
+    text-decoration:none;
+}
+.menu:hover{
+    color:#FFFFFF;
+    text-decoration:none;
+}
+.subtitle{
+    background-color:#669933;
+    color:#FFFFFF;
+}
+.item{
+    background-color:#999999;
+    color:#FFFFFF;
+}
+.message{
+    color:#669933;
+}
+.search{
+    background-color:#00CED1;
+    color:#FFFFFF;
+}
+.s-menu{
+    background-image:-webkit-linear-gradient(top, #6FACD5, #497BAE);
+    background-color:#5E87B0;
+    color:#FFFFFF;
+    text-decoration:none;
+}
+.s-login{
+    background-image:-webkit-linear-gradient(top, #6FACD5, #497BAE);
+    background-color:#5E87B0;
+    color:#FFFFFF;
+}
+.s-message{
+    color:#669933;
+}
+</style>
+
+
+<link rel="stylesheet" href="./川崎重工業グループ　電子明細_files/jquery.mobile.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./川崎重工業グループ　電子明細_files/jquery.mobile_hpmex-custom.css" type="text/css" media="all">
+
+
+
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Pragma" content="no-cache, no-store">
+<meta http-equiv="Cache-Control" content="no-cache, no-store">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noodp">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-language" content="ja">
+
+
+<title>川崎重工業グループ　電子明細</title>
+
+<script language="JavaScript" src="./川崎重工業グループ　電子明細_files/payadvice.js.ダウンロード"></script>
+<script language="JavaScript" src="./川崎重工業グループ　電子明細_files/payadviceTemplate.js.ダウンロード"></script>
+<script language="JavaScript" src="./川崎重工業グループ　電子明細_files/jquery.min.js.ダウンロード"></script>
+<script language="JavaScript">
+<!--
+function setModeConnect(mode) {		
+	document.form1.MODE.value=mode;
+
+
+
+}
+$(document).bind('mobileinit',function(){
+	$.mobile.page.prototype.options.keepNative
+		= ".data-role-none, .data-role-none *";
+});
+// -->
+
+
+function pdfDownload() {
+	
+	
+		// 通常
+	
+		location.replace("../servlet/pdf?FROM_DEVICE=smartphone&PAGE_ID=&displayMode=0&HPMEX_DAT=e2.H3FILMXU3PVAVFiCsTGL-r2ahGgM79FWZweImzfR2YZ12LycNu5LEnD_x7Dh23J6");
+	
+}
+
+var p105Win;
+function openPOP() {
+
+	var frm = document.form1;
+
+	if (p105Win && !p105Win.closed) {
+		p105Win.close();
+	}
+
+	var wx = 500;	// 幅
+	var wy = 320;	// 高さ
+	var x = (screen.width - wx) / 2;
+	var y = (screen.height - wy) / 2;
+	try {
+		var opt = "width=" + wx + ",height=" + wy + ",left=" + x + ",top=" + y
+				+ ",scrollbars=no,resizable=yes,menubar=no,toolbar=no,location=no,directories=no,status=no,titlebar=no";
+		p105Win = window.open("", "p105", opt);
+		frm.target = "p105";
+		setMode('PAGENO');
+		submitForm("PDFDOWNLOAD");
+		frm.target = "_self";
+		p105Win.focus();
+
+	} catch(e) {
+		alert(e);
+	}
+	return false;
+}
+
+function csvDownload() {
+	
+	location.replace("../servlet/csv?FROM_DEVICE=smartphone&displayMode=0&reportSoftware=0&HPMEX_DAT=e2.H3FILMXU3PVAVFiCsTGL-r2ahGgM79FWZweImzfR2YZ12LycNu5LEnD_x7Dh23J6");
+	
+}
+
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 添付ファイルＤＬ処理
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+function addtionDownload() {
+
+	location.replace("../servlet/addition?FROM_DEVICE=smartphone&displayMode=0&HPMEX_DAT=e2.H3FILMXU3PVAVFiCsTGL-r2ahGgM79FWZweImzfR2YZ12LycNu5LEnD_x7Dh23J6&attFileDLType=zip");
+
+}
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 添付ファイルＤＬチェック処理
+ * ・Footer.添付ボタン押下時
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+function addtionDownloadCheck() {
+	return submitForm('ADDITION_DL_CHK');
+}
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 添付ファイルＤＬ処理：住民税通知
+ * ・Footer.添付ボタン押下時
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+function addtionDownloadWithPopup(e) {
+
+	if (e && e.preventDefault) {
+		e.preventDefault();
+	}
+	if (e && e.stopPropagation) {
+		e.stopPropagation();
+	}
+
+	const $pw = $("#popupPassword");
+	$pw.attr("type", "password");
+	$pw.val("");
+
+	const $msg = $("#msgSlot");
+	$msg.text("");
+	$msg.removeClass("ui-state-error ui-body-alert");
+
+	const $toggle = $("#togglePassword");
+	const $textSpan = $toggle.find(".ui-btn-text");
+	$textSpan.text("表示");
+
+	// 初回のみオプション設定
+	$("#pwDialog").popup({ positionTo: "window", transition: "pop" });
+
+	// Popup を開く
+	$("#pwDialog").popup("open");
+
+	// クリック直後に自分のアクティブ/フォーカスを剥がす
+	var $btn = $(e.currentTarget || e.target);
+	setTimeout(function () {
+		$btn.removeClass("ui-btn-active ui-focus").blur();
+	}, 0);
+
+	return false;
+}
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 住民税通知Popup Toggle Button 押下
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+$(document).on("click", "#togglePassword", function (e) {
+
+	if (e) {
+		e.preventDefault();
+	}
+	const $btn = $(this);
+	const $text = $btn.find(".ui-btn-text");
+	const input = $("#popupPassword");
+
+	if (input.attr("type") === "password") {
+		input.attr("type", "text");
+		$text.text("●●●●");
+	} else {
+		input.attr("type", "password");
+		$text.text("表示");
+	}
+});
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 住民税通知Popup PW Enterkey 押下
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+$(document).on('keydown', '#popupPassword', function (e) {
+	if (e.key === 'Enter' || e.which === 13 || e.keyCode === 13) {
+		e.preventDefault();
+		$('#btnOk').trigger('click');
+	}
+});
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 住民税通知Popup OK Button 押下
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+$(document).on("click", "#btnOk", function(e) {
+
+	if (e) {
+		e.preventDefault();
+	}
+	const pw = $("#popupPassword").val().trim();
+
+	// 必須チェック
+	if (!pw) {
+		showMessage("error", "パスワードを入力してください。");
+		$("#popupPassword").focus();
+		return;
+	}
+
+	return submitForm('ADDITION_DL_CHK');
+});
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 住民税通知Popup MSG 表示 Utility
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+function showMessage(type, text) {
+	const $msg = $("#msgSlot");
+	$msg.removeClass("msg-error");
+	if (type === "error") {
+		$msg.html('<span class="msg-text">' + text + '</span>').show();
+		$msg.find(".msg-text").css("color", "#9b1c1c");
+	}
+}
+
+/**-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**
+ * 住民税通知Popup PW Focus
+ **-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-**/
+$(document).on("pagecreate", function() {
+	$("#pwDialog").on("popupafteropen", function() {
+		setTimeout(function() {
+			$("#popupPassword").trigger("focus");
+		}, 0);
+	});
+});
+
+
+
+window.addEventListener('pagehide', function() {
+	closePOP();
+});
+</script>
+
+<style>
+td { font-size: 16px; }
+
+
+
+</style>
+<script language="JavaScript" src="./川崎重工業グループ　電子明細_files/jquery.mobile.min.js.ダウンロード"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+</head>
+
+<body text="#000000" style="font-size: 16px;">
+<form name="form1" method="post" action="https://tfweb94.jp/kawasaki/servlet/RC" onsubmit="return false;" data-ajax="false" class="ui-mobile-viewport ui-overlay-c">
+	<div data-role="page" id="mainPage" data-url="mainPage" tabindex="0" class="ui-page ui-body-c ui-page-header-fixed ui-page-footer-fixed ui-page-panel ui-page-active" style="width: auto; padding-top: 41px; padding-bottom: 41px; min-height: 1339px;">
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	<script language="JavaScript">
+	<!--
+	//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+	// 表示言語切替処理
+	//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+	function changeLnguage(mode) {
+		document.form1.MODE.value = "CHANGELANGUGE";
+		document.form1.division.value = mode;
+
+		return submitForm('changeLanguage');
+	}
+	//-->
+	</script>
+	
+
+
+
+
+	
+	
+	
+	<div data-role="header" data-theme="b" data-position="fixed" style="height: 40px" class="s-menu ui-header ui-bar-b ui-header-fixed slidedown ui-panel-content-fixed-toolbar ui-panel-animate ui-panel-content-fixed-toolbar-closed" role="banner">
+	
+		
+		
+		
+		<a href="https://tfweb94.jp/kawasaki/servlet/RC#" class="s-menu ui-btn-left ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all ui-btn-icon-notext" onclick="tabletMenuChage(&#39;report_menu&#39;)" data-role="button" data-corners="true" data-icon="bars" data-iconpos="notext" data-shadow="true" data-theme="b" data-transition="fade" data-iconshadow="true" data-wrapperels="span" title=""><span class="ui-btn-inner"><span class="ui-btn-text"></span><span class="ui-icon ui-icon-bars ui-icon-shadow">&nbsp;</span></span></a>
+		
+			
+		<a href="https://tfweb94.jp/kawasaki/servlet/RC#" class="s-menu ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all ui-btn-icon-notext" onclick="tabletMenuChage(&#39;user_menu&#39;)" style="left: 70px;" data-role="button" data-corners="true" data-icon="gear" data-iconpos="notext" data-shadow="true" data-theme="b" data-transition="flow" data-iconshadow="true" data-wrapperels="span" title=""><span class="ui-btn-inner"><span class="ui-btn-text"></span><span class="ui-icon ui-icon-gear ui-icon-shadow">&nbsp;</span></span></a>
+		
+		
+		
+		
+		
+		<a href="https://tfweb94.jp/kawasaki/servlet/RC#" class="s-menu ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all ui-btn-icon-notext" onclick="$(&#39;#popupDialog&#39;).popup(&#39;open&#39;)" style="left: 110px;" data-role="button" data-corners="true" data-icon="info" data-iconpos="notext" data-shadow="true" data-theme="b" data-transition="pop" data-rel="popup" data-position-to="window" data-iconshadow="true" data-wrapperels="span" aria-haspopup="true" aria-owns="#" title=""><span class="ui-btn-inner"><span class="ui-btn-text"></span><span class="ui-icon ui-icon-info ui-icon-shadow">&nbsp;</span></span></a>
+		
+		
+		
+        
+		
+        
+        
+		
+		
+        
+		
+		
+		
+				
+			<a class="ui-btn-right s-menu ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all" href="https://tfweb94.jp/kawasaki/servlet/RC#" style="right: 40px;" data-role="button" data-shadow="true" onclick="changeLnguage(1)" data-corners="true" data-iconshadow="true" data-wrapperels="span" data-theme="b"><span class="ui-btn-inner"><span class="ui-btn-text">English</span></span></a>
+			
+		
+		
+<!-- B8200-000009 START -->
+		
+			
+			
+			<a class="ui-btn-right s-menu ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all ui-btn-icon-notext" href="https://tfweb94.jp/kawasaki/servlet/RC#" data-role="button" data-corners="true" data-icon="logout" data-iconpos="notext" data-shadow="true" data-theme="b" onclick="submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;LOGOUT&#39;); return false;" data-iconshadow="true" data-wrapperels="span" title=""><span class="ui-btn-inner"><span class="ui-btn-text"></span><span class="ui-icon ui-icon-logout ui-icon-shadow">&nbsp;</span></span></a>
+			
+		
+<!-- B8200-000009 END -->
+	</div>
+
+	<input type="hidden" name="division" id="division">
+	
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div data-role="panel" id="user_menu" data-display="overlay" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-panel-closed ui-body-c ui-panel-animate">
+		<div class="ui-panel-inner"><style>
+			#titlebar h1 {
+			  margin: 0;
+			  padding: 10px 0;
+			  border-top: solid 1px #ddd;
+			  border-bottom: solid 1px #ddd;
+			  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fafafa), color-stop(1, #eeeeee));
+			  color: #666;
+			  font-size: 22px;
+			  font-weight: normal;
+			  text-align: center;
+			}
+		</style><div id="titlebar">
+			<h1>登録情報変更</h1>
+		</div><ul data-role="listview" data-inset="true" data-theme="d" style="margin:5px;" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;PASSCHANGE&#39;); return false;" style="color: #666;" class="ui-link-inherit">
+					<font style="font-size:15px">パスワード変更</font>
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+			
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;MAILCHANGE&#39;); return false;" style="color: #666;" class="ui-link-inherit">
+					<font style="font-size:15px">メールアドレス変更</font>
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+			
+			
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;MAILSENDCHANGE&#39;); return false;" style="color: #666;" class="ui-link-inherit">
+					<font style="font-size:15px">明細メール受信設定</font>
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+			
+			
+		</ul></div>
+		
+
+		
+	</div>
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language="JavaScript">
+<!--
+function setMode(mode) {
+	document.form1.MODE.value=mode;
+	document.form1.SEARCH_MODE.value="";	// B9400-0000002 検索機能
+}
+function setChangeMode(sel, mode) {
+	document.form1.MODE.value=mode;
+	document.form1.PERIOD_LIST.value=sel.options[sel.selectedIndex].value;
+	document.form1.SEARCH_MODE.value="";	// B9400-0000002 検索機能
+}
+
+function submitWFLogin() {
+	var wf = window.open("../jsp/blank.jsp", "wf", "");
+	var Former_WHO_AM_I = document.form1.WHO_AM_I.value;
+	
+	document.form1.target = "wf";
+	document.form1.WORKFLOW.value = "true";
+	document.form1.WHO_AM_I.value = "/jsp/smartphone/J100.jsp";
+
+	submitForm("WFLOGIN");
+	document.form1.target = "_self";
+	document.form1.WORKFLOW.value = "";
+	document.form1.WHO_AM_I.value = Former_WHO_AM_I;
+}
+//-->
+</script>
+	<input type="hidden" value="20" name="TYPE">
+	<input type="hidden" value="" name="MODE">
+	<input type="hidden" value="" name="PERIOD_LIST">
+	<input type="hidden" name="WORKFLOW" id="WORKFLOW" value="">
+	<div data-role="panel" id="report_menu" data-display="reveal" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-panel-closed ui-body-c ui-panel-animate">
+		<div class="ui-panel-inner"><style>
+			#titlebar h2 {
+			  margin: 0;
+			  padding: 10px 0;
+			  border-top: solid 1px #ddd;
+			  border-bottom: solid 1px #ddd;
+			  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fafafa), color-stop(1, #eeeeee));
+			  color: #666;
+			  font-size: 22px;
+			  font-weight: normal;
+			  text-align: center;
+			}
+		</style><div id="titlebar">
+			<h2>帳票選択</h2>
+		</div><div style="box-sizing: content-box; z-index: 1; ">
+			
+			<div class="ui-select"><div data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-up-c ui-shadow ui-btn-icon-right"><span class="ui-btn-inner"><span class="ui-btn-text"><span>2026年05月</span></span><span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span></span><select id="SEL_FIGURE_DATE" data-corners="false" data-shadow="true" data-icon="arrow-d" data-iconpos="right" data-iconshadow="true" data-prevent-focus-zoom="true" data-theme="c" data-overlay-theme="a" onchange="setChangeMode(this, &#39;CHANGE&#39;);submitForm(&#39;PREVIEW&#39;)">
+				
+				<option value="2026/05" selected="">2026年05月</option>
+				
+				<option value="2026/04">2026年04月</option>
+				
+				<option value="2026/03">2026年03月</option>
+				
+				<option value="2026/02">2026年02月</option>
+				
+				<option value="2026/01">2026年01月</option>
+				
+				<option value="2025/12">2025年12月</option>
+				
+				<option value="2025/11">2025年11月</option>
+				
+			</select></div></div>
+			
+		</div><br><ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="c" data-count-theme="b" style="margin:5px;" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+		
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="" style="color:#C0C0C0;" class="ui-link-inherit">
+					給与明細書
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+		
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="setMode(&#39;30&#39;);submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;PREVIEW&#39;);return false;" style="" class="ui-link-inherit">
+					賞与明細書
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+		
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="setMode(&#39;40&#39;);submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;PREVIEW&#39;);return false;" style="" class="ui-link-inherit">
+					源泉徴収票
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+		
+		</ul><br></div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language="JavaScript">
+<!--
+function setSearchReportType( type ){
+	document.getElementById("HID_SEARCH_REPORT_TYPE").value = type;
+}
+function setSearchReportName( type ){	
+	var reportNameMap = new Map();
+
+	var repName = reportNameMap.get(type);
+	document.getElementById("HID_SEARCH_REPORT_NAME").value = repName;
+	
+}
+//-->
+</script>
+	<input type="hidden" value="" name="HID_SEARCH_REPORT_TYPE" id="HID_SEARCH_REPORT_TYPE">
+	<input type="hidden" value="" name="HID_SEARCH_REPORT_NAME" id="HID_SEARCH_REPORT_NAME">
+	<input type="hidden" value="" name="SEARCH_MODE">
+	<div data-role="panel" id="search_menu" data-display="reveal" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-panel-closed ui-body-c ui-panel-animate">
+		<div class="ui-panel-inner"><style>
+			#titlebar h2 {
+			  margin: 0;
+			  padding: 10px 0;
+			  border-top: solid 1px #ddd;
+			  border-bottom: solid 1px #ddd;
+			  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fafafa), color-stop(1, #eeeeee));
+			  color: #666;
+			  font-size: 22px;
+			  font-weight: normal;
+			  text-shadow: 0px 1px 0 #fff;
+			  text-align: center;
+			}
+		</style><div id="titlebar">
+			<h2>検索帳票選択</h2>
+		</div><br><ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="c" data-count-theme="b" style="margin:5px;" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+		
+		</ul></div>
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+
+
+		<div class="ui-panel-content-wrap ui-body-c ui-panel-animate ui-panel-content-wrap-closed"><div data-role="content" class="ui-content" role="main">
+			<table width="100%" border="0">
+			<tbody><tr>
+				<td valign="top">
+			
+					<div id="tablet_menu" style="width: 20em;padding:0px 15px 0px 0px;">
+		<style>
+			#titlebar h2 {
+			  margin: 0;
+			  padding: 10px 0;
+			  border-top: solid 1px #ddd;
+			  border-bottom: solid 1px #ddd;
+			  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fafafa), color-stop(1, #eeeeee));
+			  color: #666;
+			  font-size: 22px;
+			  font-weight: normal;
+			  text-align: center;
+			}
+		</style>
+		<div id="titlebar">
+			<h2>帳票選択</h2>
+		</div>
+		
+		
+		<div style="box-sizing: content-box; z-index: 1; ">
+			
+			<div class="ui-select"><div data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-up-c ui-shadow ui-btn-icon-right"><span class="ui-btn-inner"><span class="ui-btn-text"><span>2026年05月</span></span><span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span></span><select id="SEL_FIGURE_DATE" data-corners="false" data-shadow="true" data-icon="arrow-d" data-iconpos="right" data-iconshadow="true" data-prevent-focus-zoom="true" data-theme="c" data-overlay-theme="a" onchange="setChangeMode(this, &#39;CHANGE&#39;);submitForm(&#39;PREVIEW&#39;)">
+				
+				<option value="2026/05" selected="">2026年05月</option>
+				
+				<option value="2026/04">2026年04月</option>
+				
+				<option value="2026/03">2026年03月</option>
+				
+				<option value="2026/02">2026年02月</option>
+				
+				<option value="2026/01">2026年01月</option>
+				
+				<option value="2025/12">2025年12月</option>
+				
+				<option value="2025/11">2025年11月</option>
+				
+			</select></div></div>
+			
+		</div>
+		
+		
+		<br>
+		
+		
+		<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="c" data-count-theme="b" style="margin:5px;" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+		
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="" style="color:#C0C0C0;" class="ui-link-inherit">
+					給与明細書
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+		
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="setMode(&#39;30&#39;);submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;PREVIEW&#39;);return false;" style="" class="ui-link-inherit">
+					賞与明細書
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+		
+			<li style="border: 1px solid #eee;" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" onclick="setMode(&#39;40&#39;);submitFormByLink(&#39;/jsp/smartphone/J100.jsp&#39;, &#39;PREVIEW&#39;);return false;" style="" class="ui-link-inherit">
+					源泉徴収票
+				</a>
+			</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+		
+		</ul>
+		
+		
+		<br>
+		
+		
+		
+		
+		
+		
+	</div>
+			
+				</td>
+				<td valign="top" width="100%">
+					
+			
+			
+			
+			
+			<center style="font-size: 20px;">
+				
+				2026年05月&nbsp;
+				
+				給与明細書<br>
+			</center>
+			
+								<font style="font-size: 16px;" color="#FF0000"></font><br>
+			
+			
+			<div class="data-role-none">
+			
+			<input type="hidden" name="DISPLAY_FIGURE_DATE" id="DISPLAY_FIGURE_DATE" value="2026/05">
+			<input type="hidden" name="DISPLAY_REPORT_TYPE" id="DISPLAY_REPORT_TYPE" value="20">
+			<input type="hidden" name="REGIST_DOWNLOAD" id="REGIST_DOWNLOAD" value="false">
+			<input type="hidden" name="ADD_LIMIT" id="ADD_LIMIT" value="0">
+			<input type="hidden" name="SCREEN_CTRL" id="SCREEN_CTRL" value="">
+			<input type="hidden" name="ITEM_DATA_1" id="ITEM_DATA_1" value="">
+			<input type="hidden" name="ATTACH_DAI_ONOFF" id="ATTACH_DAI_ONOFF" value="0">
+			<input type="hidden" name="USE_REPORT_INFO_CHECK" id="USE_REPORT_INFO_CHECK" value="0">
+			<input type="hidden" name="NENTYO_SELECT_FUYOKOJO" id="NENTYO_SELECT_FUYOKOJO" value="0">
+			<input type="hidden" name="NENTYO_SELECT_HAIGUSYAKOJO" id="NENTYO_SELECT_HAIGUSYAKOJO" value="0">
+			<input type="hidden" name="MYNUMBER_DISPLAY" id="MYNUMBER_DISPLAY" value="1">
+			<input type="hidden" name="MYNUMBER_OMIT" id="MYNUMBER_OMIT" value="0">
+			<input type="hidden" name="USE_REPORT_INPUT_LIMIT" id="USE_REPORT_INPUT_LIMIT" value="0">
+			<input type="hidden" name="HID_SUBWIN_URL" id="HID_SUBWIN_URL" value="../jsp/pc/J101.jsp">
+			<input type="hidden" name="HID_UPLOADWIN_URL" id="HID_UPLOADWIN_URL" value="../jsp/smartphone/J103.jsp">
+			<input type="hidden" name="TABLE_FILE_ID" id="TABLE_FILE_ID" value="">
+			<input type="hidden" name="MYNUMBER_PAGE" id="MYNUMBER_PAGE" value="">
+			<input type="hidden" name="MYNUMBER_SUB_PAGE" id="MYNUMBER_SUB_PAGE" value="">
+			<input type="hidden" name="MYNUMBER_CLEATE" id="MYNUMBER_CLEATE" value="">
+			<input type="hidden" name="MYNUMBER_FAMILY_ADD" id="MYNUMBER_FAMILY_ADD" value="">
+			<input type="hidden" name="NENTYO_NAME" id="NENTYO_NAME" value="">
+			<input type="hidden" name="NENTYO_KANA" id="NENTYO_KANA" value="">
+			<input type="hidden" name="NENTYO_TUZUKI" id="NENTYO_TUZUKI" value="">
+			<input type="hidden" name="NENTYO_BIRTH" id="NENTYO_BIRTH" value="">
+			<input type="hidden" name="NENTYO_MYNUMBER" id="NENTYO_MYNUMBER" value="">
+			<input type="hidden" name="NENTYO_KEY" id="NENTYO_KEY" value="">
+			<input type="hidden" name="SELECTED_FAMILY" id="SELECTED_FAMILY" value="">
+			
+			<input type="hidden" name="FROM_DEVICE" id="FROM_DEVICE" value="pc">
+			
+			<input type="hidden" name="MYNUMBER_FAMILY_ADD_OPTION" id="MYNUMBER_FAMILY_ADD_OPTION" value="0">
+			<input type="hidden" name="MYNUMBER_FAMILY_DEL_OPTION" id="MYNUMBER_FAMILY_DEL_OPTION" value="0">
+			
+			<input type="hidden" name="MYNUMBER_NEXT_PAGE" id="MYNUMBER_NEXT_PAGE" value="">
+			
+			
+			
+			
+			
+			
+<!--			<input type="hidden" name="PAGE_MODE" id="PAGE_MODE" value="ENTRY">-->
+			
+			
+			
+			
+			
+			
+			
+			
+			<input type="hidden" name="NENTYO_ENTRY_TYPE" id="NENTYO_ENTRY_TYPE" value="0">
+			
+			
+			<input type="hidden" name="CALCULATIONTABLE_DISP_MODE" id="CALCULATIONTABLE_DISP_MODE" value="2">
+			
+			
+			<input type="hidden" name="SEIHOIPPAN_KYU_CERTIFICATE_ATTACH_TYPE" id="SEIHOIPPAN_KYU_CERTIFICATE_ATTACH_TYPE" value="0">
+			<input type="hidden" name="IMAGE_ATTACHED_CHECK" id="IMAGE_ATTACHED_CHECK" value="2">
+			<input type="hidden" name="IMAGE_FILE_ID" id="IMAGE_FILE_ID" value="">
+			<input type="hidden" name="ATTACHED_FILE_ID" id="ATTACHED_FILE_ID">
+			<input type="hidden" name="REG_STATUS_FLG_BEFORE" id="REG_STATUS_FLG_BEFORE">
+			<input type="hidden" name="REG_STATUS_FLG_AFTER" id="REG_STATUS_FLG_AFTER">
+			<input type="hidden" name="DISP_ATTACH_NAME" id="DISP_ATTACH_NAME">
+			<input type="hidden" name="ATTACHED_SORT_KEY_1" id="ATTACHED_SORT_KEY_1">
+			<input type="hidden" name="ATTACHED_SORT_KEY_2" id="ATTACHED_SORT_KEY_2">
+			<input type="hidden" name="DELETE_ATTACHED_FILE_ID" id="DELETE_ATTACHED_FILE_ID">
+			<input type="hidden" name="REG_STATUS_FLG_DELETE" id="REG_STATUS_FLG_DELETE">
+
+					
+					
+						
+						
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tbody><tr><td width="50%">&nbsp;</td><td align="center">
+
+<a name="JR_PAGE_ANCHOR_0_1" class="ui-link">
+<table style="width: 938px" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tbody><tr>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 30px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 30px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 15px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 30px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 15px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 3px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 1px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 8px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 6px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 43px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 9px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 2px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 8px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 10px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 1px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 1px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 28px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 7px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 18px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 8px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 2px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 25px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 1px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 14px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 6px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 4px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 25px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 24px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 1px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 7px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 13px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 30px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 2px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 23px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 4px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 6px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 6px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 9px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 4px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 2px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 1px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 32px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 13px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 12px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 25px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 50px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 8px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 15px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 9px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 8px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 40px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 1px;"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 1px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="71"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 938px; height: 20px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="30"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 380px; height: 23px;"></td>
+  <td colspan="9" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">給与</span></td>
+  <td colspan="7" valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">明細書</span></td>
+  <td colspan="10"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 91px; height: 23px;"></td>
+  <td colspan="4" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">2026</span></td>
+  <td colspan="2" valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">年</span></td>
+  <td valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">05</span></td>
+  <td valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">月払</span></td>
+  <td colspan="4" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">NO.</span></td>
+  <td colspan="2" valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">27</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 23px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">給与改定通知</span></td>
+  <td colspan="28" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">職能資格　　S2</span></td>
+  <td colspan="20" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">給与・退職金基礎点を通知します。</span></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">職能給基本額　　387,980円</span></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">退職金Ａ・Ｂ基礎点は、前年度基礎点合計に</span></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">習熟加算累積額　　8,540円</span></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">今年度加算点をそれぞれに加えた結果です。</span></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">調整給　　0円</span></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">役割手当　　0円</span></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">給与合計　　396,520円</span></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">退職金Ａ基礎点　　1,830点</span></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">退職金Ｂ基礎点　　1,891点</span></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="21" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 3px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 10.0px;">今月より子ども・子育て支援金が控除されます</span></td>
+  <td colspan="28" valign="middle" style="padding-left: 3px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="20" valign="middle" style="padding-left: 3px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="71"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 938px; height: 5px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="4" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">所管</span></td>
+  <td colspan="4" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">勤務地</span></td>
+  <td colspan="28" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 5px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">所属</span></td>
+  <td colspan="4" rowspan="3" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">性<br>別</span></td>
+  <td rowspan="6" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">税<br>項<br>目</span></td>
+  <td colspan="2" rowspan="3" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">税<br>表</span></td>
+  <td colspan="3" rowspan="3" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">配<br>偶</span></td>
+  <td rowspan="3" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">扶<br>養</span></td>
+  <td colspan="2" rowspan="3" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">特<br>控</span></td>
+  <td colspan="4" rowspan="3" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">結<br>婚</span></td>
+  <td colspan="16" rowspan="2" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 5px;"></td>
+  <td colspan="4" rowspan="2" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">KAP</span></td>
+  <td colspan="4" rowspan="2" valign="middle"><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="28" rowspan="2" valign="middle" style="padding-left: 5px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">30301000</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 5px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 10px;"></td>
+  <td colspan="16" rowspan="2" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 10px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 10px;"></td>
+  <td colspan="5" rowspan="2" valign="middle" style="border-top-style: solid; border-top-width: 1px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">従業員番号</span></td>
+  <td colspan="4" rowspan="3" style="border-top-style: solid; border-top-width: 1px; border-top-color: #6FBE8B; padding-top: 2px; padding-left: 3px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">氏名</span></td>
+  <td colspan="27" rowspan="3" valign="middle" style="border-top-style: solid; border-top-width: 1px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">磯谷　剛士</span></td>
+  <td colspan="4" rowspan="3" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">1</span></td>
+  <td colspan="2" rowspan="3" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">1</span></td>
+  <td colspan="3" rowspan="3" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">1</span></td>
+  <td rowspan="3" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">0</span></td>
+  <td colspan="2" rowspan="3" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">00</span></td>
+  <td colspan="4" rowspan="3" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">1</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 10px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 5px;"></td>
+  <td colspan="16" rowspan="2" valign="middle" style="padding-left: 3px; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 5px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="5" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">13102</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td rowspan="6" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">勤<br>怠</span></td>
+  <td colspan="11" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">所定日数</span></td>
+  <td colspan="3" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">20.00</span></td>
+  <td colspan="4" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">日</span></td>
+  <td colspan="14" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="11" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">出勤日</span></td>
+  <td colspan="3" valign="middle" style="background-color: #CCFFCC; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">19.00</span></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">日</span></td>
+  <td colspan="14" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="11" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">有休日数</span></td>
+  <td colspan="3" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">1.00</span></td>
+  <td colspan="4" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">日</span></td>
+  <td colspan="14" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle"><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle"><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle"><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="11" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">時間外計</span></td>
+  <td colspan="3" valign="middle" style="background-color: #CCFFCC; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">19.00</span></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">Ｈ</span></td>
+  <td colspan="14" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="11" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">不食日数</span></td>
+  <td colspan="3" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">19.00</span></td>
+  <td colspan="4" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">回</span></td>
+  <td colspan="14" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle"><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle"><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">年次休暇残日数</span></td>
+  <td colspan="2" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">43.00</span></td>
+  <td valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">日</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="11" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">昼食回数</span></td>
+  <td colspan="3" valign="middle" style="background-color: #CCFFCC; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">6.00</span></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">回</span></td>
+  <td colspan="14" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="2" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">積立休暇残日数</span></td>
+  <td colspan="2" valign="middle" style="background-color: #CCFFCC; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">60.00</span></td>
+  <td valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">日</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td rowspan="8" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">支<br>給<br>項<br>目</span></td>
+  <td colspan="15" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">職能給基本額</span></td>
+  <td colspan="8" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">387,980</span></td>
+  <td colspan="18" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">習熟加算累積額</span></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">8,540</span></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">時間外手当</span></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">61,598</span></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">遡及差額</span></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">25,620</span></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 20px;"></td>
+  <td colspan="63" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">支給総額</span></td>
+  <td colspan="6" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">483,738</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 20px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td rowspan="11" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">引<br>去<br>項<br>目</span></td>
+  <td colspan="15" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">雇用保険</span></td>
+  <td colspan="8" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">2,418</span></td>
+  <td colspan="18" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">厚生年金</span></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">37,515</span></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">健康保険</span></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">14,678</span></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">介護保険</span></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">0</span></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">所得税</span></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">14,800</span></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">住民税</span></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">11,100</span></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">子育て支援金</span></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">471</span></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">給食費</span></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">2,164</span></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">ＫＧＳ引去</span></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">760</span></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">組合費</span></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; background-color: #CCFFCC; font-size: 11.0px;">5,948</span></td>
+  <td colspan="18" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="15" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">ＫＬＣ保険</span></td>
+  <td colspan="8" valign="middle" style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">8,000</span></td>
+  <td colspan="18" valign="middle" style="padding-left: 1px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" valign="middle" style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="13" valign="middle" style="padding-left: 1px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 20px;"></td>
+  <td colspan="63" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">引去項目計</span></td>
+  <td colspan="6" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">97,854</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 20px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td rowspan="11" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">雇現<br>保物<br>対給<br>象与<br>額等</span></td>
+  <td colspan="13" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" rowspan="11" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">課現<br>税物<br>対給<br>象与<br>額等</span></td>
+  <td colspan="16" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" rowspan="11" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">そ<br>の<br>他</span></td>
+  <td colspan="11" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="background-color: #CCFFCC; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="11" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="background-color: #CCFFCC; border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="background-color: #CCFFCC; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="9" rowspan="2" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">その他計</span></td>
+  <td colspan="6" rowspan="2" valign="middle" style="border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="13" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="16" valign="middle" style="border-left-style: solid; border-left-width: 1px; border-left-color: #6FBE8B; padding-left: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="6" valign="middle" style="padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="20" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">銀行</span></td>
+  <td colspan="28" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">支店</span></td>
+  <td colspan="8" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">口座番号</span></td>
+  <td colspan="4" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">振込金額</span></td>
+  <td colspan="9" valign="middle" style="border-top-style: solid; border-top-width: 2px; border-top-color: #6FBE8B; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">差引支給額</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="2" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">0036</span></td>
+  <td colspan="18" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">楽天銀行</span></td>
+  <td colspan="5" valign="middle" style="padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">223</span></td>
+  <td colspan="23" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">ラテン支店</span></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">2421374</span></td>
+  <td colspan="4" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">50,000</span></td>
+  <td colspan="9" rowspan="3" valign="middle" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 2px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">385,884</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="2" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">0543</span></td>
+  <td colspan="18" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">名古屋銀行</span></td>
+  <td colspan="5" valign="middle" style="padding-left: 1px; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">110</span></td>
+  <td colspan="23" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">上前津支店</span></td>
+  <td colspan="8" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">5021139</span></td>
+  <td colspan="4" valign="middle" style="border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">335,884</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 15px;"></td>
+  <td colspan="2" valign="middle" style="border-left-style: solid; border-left-width: 2px; border-left-color: #6FBE8B; padding-left: 1px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="18" valign="middle" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="5" valign="middle" style="padding-left: 1px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="23" valign="middle" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="8" valign="middle" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td colspan="4" valign="middle" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #6FBE8B; border-right-style: solid; border-right-width: 1px; border-right-color: #6FBE8B; padding-right: 1px; "><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 20px; height: 25px;"></td>
+  <td colspan="69" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">川崎重工航空宇宙プロダクションテクノロジー株式会社</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 17px; height: 25px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="71"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 938px; height: 40px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="4"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 60px; height: 15px;"></td>
+  <td colspan="2" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">KAP</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 15px;"></td>
+  <td colspan="4" valign="middle"><img alt="" src="./川崎重工業グループ　電子明細_files/image" border="0"></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 15px;"></td>
+  <td colspan="6" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">30301000</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 15px;"></td>
+  <td colspan="8" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">13102</span></td>
+  <td><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 5px; height: 15px;"></td>
+  <td colspan="3" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 11.0px;">27</span></td>
+  <td colspan="40"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 551px; height: 15px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="4"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 60px; height: 23px;"></td>
+  <td colspan="4" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">2026</span></td>
+  <td colspan="2" valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">年</span></td>
+  <td colspan="2" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">05</span></td>
+  <td colspan="2" valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">月払</span></td>
+  <td colspan="10" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">給与</span></td>
+  <td colspan="9" valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 18.0px;">明細書</span></td>
+  <td colspan="38"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 528px; height: 23px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="4"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 60px; height: 23px;"></td>
+  <td colspan="3" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">所属：</span></td>
+  <td colspan="29" rowspan="2" style="padding-top: 6px; "><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">第一生産技術部</span></td>
+  <td colspan="35"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 493px; height: 23px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="7"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 115px; height: 23px;"></td>
+  <td colspan="35"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 493px; height: 23px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="4"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 60px; height: 23px;"></td>
+  <td colspan="3" valign="middle" style="text-align: right;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">氏名：</span></td>
+  <td colspan="25" valign="middle"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">磯谷　剛士</span></td>
+  <td colspan="39"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 533px; height: 23px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="4"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 60px; height: 25px;"></td>
+  <td colspan="31" valign="middle" style="text-align: center;"><span style="font-family: ＭＳ ゴシック; font-size: 14.0px;">川崎重工航空宇宙プロダクションテクノロジー株式会社</span></td>
+  <td colspan="36"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 518px; height: 25px;"></td>
+</tr>
+<tr valign="top">
+  <td colspan="71"><img alt="" src="./川崎重工業グループ　電子明細_files/image" style="width: 938px; height: 110px;"></td>
+</tr>
+</tbody></table>
+
+</a></td><td width="50%">&nbsp;</td></tr>
+</tbody></table>
+
+						
+					
+					
+					</div>
+					
+
+					
+				</td>
+			</tr>
+			</tbody></table>
+		</div></div>
+
+		
+		<div style="display: none;"><!-- placeholder for pwDialog --></div>
+		
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.ui-btn-center {
+	position:relative;
+	top:3px;
+	vertical-align:middle;
+	margin:0;
+}
+</style>
+
+
+	
+	
+	<div data-role="footer" data-theme="b" data-position="fixed" style="height: 40px" class="s-menu ui-footer ui-bar-b ui-footer-fixed slideup ui-panel-content-fixed-toolbar ui-panel-animate ui-panel-content-fixed-toolbar-closed" role="contentinfo">
+	
+		
+		<center>
+
+			
+			
+			<a class="ui-btn-center ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-icon-left" href="https://tfweb94.jp/kawasaki/servlet/RC#" data-role="button" style="" data-shadow="true" data-icon="download" data-iconpos="left" data-inline="true" onclick="pdfDownload();" data-corners="true" data-iconshadow="true" data-wrapperels="span" data-theme="b"><span class="ui-btn-inner"><span class="ui-btn-text">PDF</span><span class="ui-icon ui-icon-download ui-icon-shadow">&nbsp;</span></span></a>
+			
+			
+
+		</center>
+	</div>
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language="JavaScript">
+<!--
+function getTruncatePoint(idName, point) {
+	var message = $(idName).html();
+	var tags = new Array("<br>", "&lt;", "&gt;", "&amp;", "&quot;", "&nbsp;");
+	for (var idx = 0; idx < tags.length; ++idx) {
+		var tag = tags[idx] + "";
+		var tagLength = tag.length;
+		for (var cnt = point - tagLength; cnt < point + 2; ++cnt) {
+			if(tag == message.substr(cnt, tagLength)) {
+				point = cnt - 1;
+				return point;
+			}
+		}
+	}
+	return point;
+}
+function initTruncate(newsTag, point) {
+	var more = "▼";
+	
+	newsTag.each(function() {
+		var obj = $(this);
+		var str = obj.html();
+
+		if (str.length > point + 10) {
+			var makePoint = getTruncatePoint(obj, point);
+			obj.html(
+				'<span class="truncate_news">' + str.substring(0, makePoint) + '...</span>'
+			);
+			obj.append(
+				'<span class="truncate_hide" style="display: none;">' +
+					str +
+				'</span>'
+			);
+			obj.append(
+				'<div>' +
+					'<a href="#" class="truncate_anc" style="text-decoration:none;" onclick="doTruncate(this, ' + point + '); return false;">' +
+					more +
+					'</a>' +
+				'</div>'
+			);
+		}
+	});
+}
+function doTruncate(anc, point) {
+	var more = "▼";
+	var less = "▲";
+
+	var obj = $(anc);
+	var newsParent = obj.parent().parent();
+	var news = $('.truncate_news', newsParent);
+	var hide = $('.truncate_hide', newsParent);
+	$('#popupDialog').popup('close');
+
+	if (obj.text() == more) {
+		news.html(hide.html());
+		obj.text(less);
+	} else{
+		var makePoint = getTruncatePoint(hide, point);
+		news.html(
+			hide.html().substring(0, makePoint) +
+			"..."
+		);
+		obj.text(more);
+	}
+	
+	var scrollPosition = $('#mainPage').scrollTop();
+	var windowScrollPosition = $(window).scrollTop();
+	$('#popupDialog').popup('open');
+	$('#mainPage').scrollTop(scrollPosition);
+	$(window).scrollTop(windowScrollPosition);
+}
+function initPublishNewsTruncate(newsTag, point) {
+	var more = "▼";
+
+	newsTag.each(function() {
+		var obj = $(this);
+		var subject = $('#Subject', obj);
+		var str = subject.html();
+		var setMore = false;
+
+		if (str.length > point + 10) {
+			var makePoint = getTruncatePoint(subject, point);
+			subject.html(
+				'<span class="truncate_news">' + str.substring(0, makePoint) + '...</span>'
+			);
+			subject.append(
+				'<span class="truncate_hide" style="display: none;">' +
+					str +
+				'</span>'
+			);
+			subject.append(
+				'<div>' +
+					'<a href="#" class="truncate_anc" style="text-decoration:none;" onclick="doPublishNewsTruncate(this, ' + point + '); return false;">' +
+					more +
+					'</a>' +
+				'</div>'
+			);
+			setMore = true;
+		}
+
+		var body = $('#Body', obj);
+		str = body.html();
+		if (str != null && str != "") {
+			body.css('display', 'none');
+
+			if (!setMore) {
+				subject.append(
+					'<div>' +
+						'<a href="#" class="truncate_anc" style="text-decoration:none;" onclick="doPublishNewsTruncate(this, ' + point + '); return false;">' +
+						more +
+						'</a>' +
+					'</div>'
+				);
+			}
+		}
+	});
+}
+function doPublishNewsTruncate(anc, point) {
+	var more = "▼";
+	var less = "▲";
+
+	var obj = $(anc);
+	var subject = obj.parent().parent();
+	var news = $('.truncate_news', subject);
+	var hide = $('.truncate_hide', subject);
+	var body = $('#Body', obj.parent().parent().parent());
+
+	if (obj.text() == more) {
+		news.html(hide.html());
+		body.css('display', '');
+		obj.text(less);
+	} else{
+		if (hide.length) {
+			var makePoint = getTruncatePoint(hide, point);
+			news.html(
+				hide.html().substring(0, makePoint) +
+				"..."
+			);
+		}
+		body.css('display', 'none');
+		obj.text(more);
+	}
+	
+	var scrollPosition = $('#mainPage').scrollTop();
+	var windowScrollPosition = $(window).scrollTop();
+	$('#popupDialog').popup('close');
+	$('#popupDialog').popup('open');
+	$('#mainPage').scrollTop(scrollPosition);
+	$(window).scrollTop(windowScrollPosition);
+
+}
+
+$().ready(function() {
+	
+	if (0 < $('[id=publishNews]').size()) {
+		initPublishNewsTruncate($('[id=publishNews]' ), 40);
+	}
+	
+	$('#popupDialog').popup({history: false}); 
+
+//	$('#popupDialog').popup('close');
+	$('#popupDialog').popup('open');
+
+			
+});
+//-->
+</script>
+<style>
+</style>
+	<div style="display: none;"><!-- placeholder for popupDialog --></div>
+
+
+		<input type="hidden" name="TYPE" id="TYPE" value="">
+		<input type="hidden" name="WHO_AM_I" id="WHO_AM_I" value="/jsp/smartphone/J100.jsp">
+		<input type="hidden" name="PAGE_MODE" id="PAGE_MODE" value="ENTRY">
+		<input type="hidden" name="displayMode" id="displayMode" value="0">
+		<input type="hidden" name="HPMEX_DAT" id="HPMEX_DAT" value="e2.H3FILMXU3PVAVFiCsTGL-r2ahGgM79FWZweImzfR2YZ12LycNu5LEnD_x7Dh23J6">
+		<input type="hidden" name="HID_START_URL" id="HID_START_URL" value="../servlet/RC">
+		<input type="hidden" name="HID_SUBMIT_URL" id="HID_SUBMIT_URL" value="../servlet/RC">
+		<input type="hidden" name="HID_DL_URL" id="HID_DL_URL" value="../servlet/pdf">
+		<input type="hidden" name="HID_HELP_URL" id="HID_HELP_URL" value="../jsp/pc/J102.jsp">
+		<input type="hidden" name="USER_ID" id="USER_ID" value="">
+		<input type="hidden" name="SOURCE_DSP_ID" id="SOURCE_DSP_ID" value="">
+	<div class="ui-screen-hidden ui-popup-screen ui-overlay-a" id="pwDialog-screen"></div><div class="ui-popup-container ui-popup-hidden" id="pwDialog-popup"><div data-role="popup" id="pwDialog" data-overlay-theme="a" class="ui-popup ui-overlay-shadow ui-corner-all" aria-disabled="false" data-disabled="false" data-shadow="true" data-corners="true" data-transition="none" data-position-to="origin" data-dismissible="true">
+			<div data-role="header" data-theme="b" class="s-menu ui-header ui-bar-b" role="banner">
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left s-menu ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all ui-btn-icon-notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="b" title="閉じる"><span class="ui-btn-inner"><span class="ui-btn-text">閉じる</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+				<h2 id="dlog_title" class="ui-title" role="heading" aria-level="1">パスワード入力</h2>
+			</div>
+			<div role="main" class="ui-content">
+				<div id="msgSlot" class="msg-slot" role="region" aria-live="polite" aria-atomic="true">
+					<label></label>
+				</div>
+				<p>税通帳票ファイルを解凍するパスワードを入力してください。</p>
+				<p>パスワードはパスワード確認用サイトから取得してください。</p>
+				<p></p>
+				<div class="pw-row">
+					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-c"><input type="password" id="popupPassword" name="popupPassword" maxlength="99" size="40" autocomplete="off" class="ui-input-text ui-body-c"></div>
+					<a href="https://tfweb94.jp/kawasaki/servlet/RC#" id="togglePassword" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-mini"><span class="ui-btn-inner"><span class="ui-btn-text">
+						<span class="">表示</span>
+					</span></span></a>
+				</div>
+				<p></p>
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" id="btnOk" data-role="button" style="height: 40px" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><span class="ui-btn-text">OK</span></span></a>
+			</div>
+			<div data-role="footer" data-theme="b" style="height: 40px" class="s-menu ui-footer ui-bar-b" role="contentinfo">
+			</div>
+		</div></div><div class="ui-popup-screen ui-overlay-a in" id="popupDialog-screen"></div><div class="ui-popup-container ui-popup-active" id="popupDialog-popup" style="max-width: 1370px; top: 546.727px; left: 371.5px;" tabindex="0"><div id="popupDialog" data-role="popup" data-overlay-theme="a" class="ui-popup ui-overlay-shadow ui-corner-all ui-body-c" aria-disabled="false" data-disabled="false" data-shadow="true" data-corners="true" data-transition="none" data-position-to="origin" data-dismissible="true">
+		
+		
+		<div data-role="header" data-theme="b" class="s-menu ui-header ui-bar-b" role="banner">
+		
+			<a href="https://tfweb94.jp/kawasaki/servlet/RC#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left s-menu ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all ui-btn-icon-notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="b" title="閉じる"><span class="ui-btn-inner"><span class="ui-btn-text">閉じる</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+			<h2 id="dlog_title" class="ui-title" role="heading" aria-level="1">お知らせ</h2>
+		</div>
+		<div data-role="content" class="ui-content" role="main" style="background-color:#fffff !important;">
+			
+			
+			
+			
+			
+			<div>
+				<font id="loginNews" style="font-size: 16px;">紙印刷はパソコン画面下部の「PDF」ボタンを押してPDFから印刷できます。<br>PDFパスワードは左上歯車のマーク「パスワード変更」から任意に変更できます。<br><br>メールアドレスは左上歯車のマーク「メールアドレス変更」から任意に変更できます。<br>確認メールに再度ログインしてメールアドレス変更が完了します。<br><br>確定申告に源泉徴収票の添付提出は不要です。<br><br>24か月前の明細等は閲覧できなくなりますので、必要な場合はPDF等で保管ください。</font>
+			</div>
+			<br>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</div>
+		
+		
+		
+		<div data-role="footer" data-theme="b" style="height: 40px" class="s-menu ui-footer ui-bar-b" role="contentinfo">
+			<font style="font-size: 13px;">
+		
+				前回ログイン：<br>
+				2026/06/02 21:22:18
+			</font>
+		</div>
+	</div></div><div class="ui-panel-dismiss" data-panelid="user_menu"></div><div class="ui-panel-dismiss" data-panelid="report_menu"></div><div class="ui-panel-dismiss" data-panelid="search_menu"></div></div>
+<div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon ui-icon-loading"></span><h1>loading</h1></div></form>
+<form name="form2" method="post" action="https://tfweb94.jp/kawasaki/servlet/RC">
+	<input type="hidden" name="WHO_AM_I" id="WHO_AM_I" value="/jsp/smartphone/J100.jsp">
+	<input type="hidden" name="PAGE_MODE" id="PAGE_MODE" value="">
+	<input type="hidden" name="HPMEX_DAT" id="HPMEX_DAT" value="e2.H3FILMXU3PVAVFiCsTGL-r2ahGgM79FWZweImzfR2YZ12LycNu5LEnD_x7Dh23J6">
+	<input type="hidden" name="PAGE_ID" id="PAGE_ID" value="">
+	<input type="hidden" name="DISPLAY_REPORT_TYPE" id="DISPLAY_REPORT_TYPE" value="20">
+	<input type="hidden" name="TEMPLATE_NAME" id="TEMPLATE_NAME" value="">
+	<input type="hidden" name="TARGET_ITEM" id="TARGET_ITEM" value="">
+	<input type="hidden" name="HTML_TYPE" id="HTML_TYPE" value="">
+	<input type="hidden" name="FILE_ID" id="FILE_ID" value="">
+	<input type="hidden" name="CERTIFICATE_TYPE" id="CERTIFICATE_TYPE" value="">
+	<input type="hidden" name="SHINKOKU_YEAR" id="SHINKOKU_YEAR" value="">
+	<input type="hidden" name="ATTACH_NAME" id="ATTACH_NAME">
+	<input type="hidden" name="SORT_KEY_1" id="SORT_KEY_1">
+	<input type="hidden" name="SORT_KEY_2" id="SORT_KEY_2">
+	<input type="hidden" name="ENTRY_FLG" id="ENTRY_FLG">
+	<input type="hidden" name="FILE_ID_DELETE_FLG" id="FILE_ID_DELETE_FLG">
+</form>
+
+	
+
+
+<script language="JavaScript">
+<!--
+	$('#mainPage').bind('pageshow',
+		function() {
+			$('.ui-page').width('auto');
+		}
+	);
+//-->
+
+
+</script>
+
+
+<script language="JavaScript">
+<!--
+//	$('#mainPage').bind('pageshow',
+//		function() {
+//			$('#popupDialog').popup({history: false});
+//			$('#popupDialog').popup('open');
+//		}
+//	);
+//-->
+</script>
+
+
+<script language="JavaScript">
+<!--
+
+
+	$('#tablet_menu').html(
+		$('#report_menu').html()
+	);
+
+
+	function tabletMenuChage(menu) {
+
+		$('#tablet_menu').html(
+			$('#' + menu).find('.ui-panel-inner').html()
+		);
+	}
+
+//-->
+</script>
+
+
+
+
+
+
+<script>
+$().ready(function() {
+
+});
+</script>
+
+
+
+
+
+
+</body></html>

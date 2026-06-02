@@ -1,0 +1,241 @@
+
+<!-- saved from url=(0038)https://tfweb94.jp/kawasaki/servlet/RC -->
+<html class="ui-mobile"><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"><!--<base href="https://tfweb94.jp/kawasaki/servlet/RC">--><base href=".">
+<link rel="stylesheet" href="./ログインページ_files/payadvice.css" type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.menu{
+    background-color:#666666;
+    color:#FF9900;
+    text-decoration:none;
+}
+.menu:hover{
+    color:#FFFFFF;
+    text-decoration:none;
+}
+.subtitle{
+    background-color:#669933;
+    color:#FFFFFF;
+}
+.item{
+    background-color:#999999;
+    color:#FFFFFF;
+}
+.message{
+    color:#669933;
+}
+.search{
+    background-color:#00CED1;
+    color:#FFFFFF;
+}
+.s-menu{
+    background-image:-webkit-linear-gradient(top, #6FACD5, #497BAE);
+    background-color:#5E87B0;
+    color:#FFFFFF;
+    text-decoration:none;
+}
+.s-login{
+    background-image:-webkit-linear-gradient(top, #6FACD5, #497BAE);
+    background-color:#5E87B0;
+    color:#FFFFFF;
+}
+.s-message{
+    color:#669933;
+}
+</style>
+
+
+<link rel="stylesheet" href="./ログインページ_files/jquery.mobile.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./ログインページ_files/jquery.mobile_hpmex-custom.css" type="text/css" media="all">
+
+
+
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Pragma" content="no-cache, no-store">
+<meta http-equiv="Cache-Control" content="no-cache, no-store">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noodp">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-language" content="ja">
+
+
+<title>川崎重工業グループ　電子明細</title>
+<script language="JavaScript" src="./ログインページ_files/payadvice.js.ダウンロード"></script>
+<script language="JavaScript" src="./ログインページ_files/jquery.min.js.ダウンロード"></script>
+<script language="JavaScript" src="./ログインページ_files/jquery.mobile.min.js.ダウンロード"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<script language="JavaScript">
+<!--
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// ログイン処理
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function onClickLogin() {
+	func_user_id_set();
+	document.cookie = "HPMEXAUTH=0";
+	return submitFormLogin('LOGIN', '/jsp/smartphone/J000.jsp');
+}
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// PCモード遷移処理
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function onClickPCLogin() {
+	document.form1.WHO_AM_I.value = "/jsp/unknown.jsp";
+	document.form1.PAGE_MODE.value = "UNKNOWN";
+	document.form1.HPMEX_AGENT_TYPE.value = "PC";
+	document.form1.method = "POST";
+	document.form1.action = "../servlet/RC";
+	document.form1.submit();
+	return;
+}
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// スマートフォンモード遷移処理
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function onClickSmartphoneLogin() {
+	document.form1.WHO_AM_I.value = "/jsp/unknown.jsp";
+	document.form1.PAGE_MODE.value = "UNKNOWN";
+	document.form1.HPMEX_AGENT_TYPE.value = "SMARTPHONE";
+	document.form1.method = "POST";
+	document.form1.action = "../servlet/RC";
+	document.form1.submit();
+	return;
+}
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// 携帯画面遷移処理
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function onClickMobileLogin() {
+	document.form1.WHO_AM_I.value = "/jsp/unknown.jsp";
+	document.form1.PAGE_MODE.value = "UNKNOWN";
+	document.form1.HPMEX_AGENT_TYPE.value = "MOBILE";
+	document.form1.method = "POST";
+	document.form1.action = "../servlet/RC";
+	document.form1.submit();
+	return;
+}
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// 表示言語切替処理
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function changeLnguage(mode) {
+	document.form1.division.value = mode;
+	func_user_id_set();
+	return submitForm('changeLanguage');
+}
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// ユーザＩＤを隠項目に退避
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function func_user_id_set(){
+	document.getElementById("USER_ID").value = document.getElementById("HID_USER_ID").value;
+}
+//-->
+</script>
+</head>
+<body text="#000000" style="font-size: 16px;">
+
+<form name="form1" method="post" action="https://tfweb94.jp/kawasaki/servlet/RC" autocomplete="off" onsubmit="return onClickLogin()" data-ajax="false" class="ui-mobile-viewport ui-overlay-c">
+
+	<div data-role="page" data-url="/kawasaki/servlet/RC" tabindex="0" class="ui-page ui-body-c ui-page-header-fixed ui-page-active" style="padding-top: 41px; min-height: 1380px;">
+		
+		
+		<div data-role="header" data-theme="b" data-position="fixed" class="s-menu ui-header ui-bar-b ui-header-fixed slidedown" style="height: 40px" role="banner">
+		
+			
+			
+			
+			
+			<a href="https://tfweb94.jp/kawasaki/servlet/RC#" data-role="button" data-shadow="true" class="ui-btn-right s-menu ui-btn ui-shadow ui-btn-corner-all ui-btn-up-b" onclick="changeLnguage(1)" data-corners="true" data-iconshadow="true" data-wrapperels="span" data-theme="b"><span class="ui-btn-inner"><span class="ui-btn-text">English</span></span></a>
+			
+			
+		</div>
+		<div data-role="content" class="ui-content" role="main">
+			<center>
+			<div align="left" style="max-width: 400px;">
+				<img src="./ログインページ_files/systemimage">
+				<br>
+				<font style="font-size: 16px;">Ver.10.5.0</font>
+				<br>
+				
+				
+				
+				<div class="s-login">
+				
+					<div style="padding: 10px;">
+						
+						<label for="HID_USER_ID" style="font-weight:bold;" class="ui-input-text">
+							
+							
+							ユーザID
+							
+						</label>
+						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-c"><input type="text" id="HID_USER_ID" name="HID_USER_ID" value="" onchange="func_user_id_set()" onblur="func_user_id_set()" class="ui-input-text ui-body-c"></div>
+						
+						<label for="PASSWORD" style="font-weight:bold;" class="ui-input-text">
+							
+							
+							パスワード
+							
+						</label>
+						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-c"><input type="password" id="PASSWORD" name="PASSWORD" value="" class="ui-input-text ui-body-c"></div>
+						<br>
+						
+						<div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" data-disabled="false" class="ui-submit ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" aria-disabled="false"><span class="ui-btn-inner"><span class="ui-btn-text">ログイン</span></span><input type="submit" data-shadow="true" value="ログイン" class="ui-btn-hidden" data-disabled="false"></div>
+					</div>
+				</div>
+				<br>
+				
+				
+				<a href="https://tfweb94.jp/kawasaki/servlet/RC#" data-inline="true" onclick="submitFormByLink(&quot;/jsp/smartphone/J000.jsp&quot;, &quot;PASSINFO&quot;); return false;" class="ui-link">パスワードを忘れたら... / Forget login password?</a>
+				<br>
+				<br>
+				
+				
+				<div>
+					ユーザＩＤ/パスワードは、必ず半角文字にて大文字/小文字を区別し、正しく入力してください。<br>Note : User ID and password are case sensitive.<br><br>参考　川崎重工業HRガイドブック<br>https://swat.khi.co.jp/home/jinji/rousei/pamphdata/HRguide2025.pdf
+				</div>
+				<br>
+				
+				
+				<div>
+					<font color="#A9A9A9"></font>
+				</div>
+			</div>
+			</center>
+		</div>
+
+		<input type="hidden" name="DISPLAY_REPORT_MODE" id="DISPLAY_REPORT_MODE" value="">
+		<input type="hidden" name="SPECIFIC_REPORT_TYPE" id="SPECIFIC_REPORT_TYPE" value="">
+		<input type="hidden" name="SPECIFIC_FIGURE_DATE" id="SPECIFIC_FIGURE_DATE" value="">
+		<input type="hidden" name="USER_MAILADDRESS" id="USER_MAILADDRESS" value="">
+		<input type="hidden" name="KARAMAIL_TIMESTAMP" id="KARAMAIL_TIMESTAMP" value="">
+		<input type="hidden" name="WHO_AM_I" id="WHO_AM_I" value="/jsp/smartphone/J000.jsp">
+		<input type="hidden" name="PAGE_MODE" id="PAGE_MODE">
+		<input type="hidden" name="HPMEX_AGENT_TYPE" id="HPMEX_AGENT_TYPE" value="">
+		<input type="hidden" name="KEY" id="KEY" value="">
+		<input type="hidden" name="division" id="division">
+		<input type="hidden" name="USER_ID" id="USER_ID" value="">
+		<input type="hidden" name="displayMode" id="displayMode" value="0">
+		<input type="hidden" name="TYPE" id="TYPE" value="">
+	</div>
+<div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon ui-icon-loading"></span><h1>loading</h1></div></form>
+
+ 
+
+ 
+
+
+
+</body></html>

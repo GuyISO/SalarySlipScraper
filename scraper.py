@@ -1,4 +1,5 @@
 import os
+import sys
 import datetime
 import json
 import shutil
@@ -7,18 +8,26 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.edge.service import Service
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import pandas
 from slip import Slip
 
-FILE_NAME_SETTING = 'settings.json'
-FILE_NAME_CSV = 'SalarySlip.csv'
-FOLDER_NAME_BACKUP = 'backup'
+def get_runtime_base_dir():
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(os.path.abspath(__file__))
+
+BASE_DIR = get_runtime_base_dir()
+FILE_PATH_SETTING = os.path.join(BASE_DIR, 'config', 'settings.json')
+FILE_PATH_CSV = os.path.join(BASE_DIR, 'data', 'SalarySlip.csv')
+FOLDER_PATH_BACKUP = os.path.join(BASE_DIR, 'data', 'backup')
 
 file_name_backup = 'backup_' + datetime.date.today().strftime('%Y%m%d') + '.csv'
-file_path_backup = FOLDER_NAME_BACKUP + '//' +file_name_backup
+file_path_backup = os.path.join(FOLDER_PATH_BACKUP, file_name_backup)
 
 class SalarySlipScraper():
     
@@ -33,16 +42,18 @@ class SalarySlipScraper():
         print("  SalarySlipScraper起動")
         print("------------------------------------------------------")
         print("  設定ファイル読込")
-        print("    読込完了:" + FILE_NAME_SETTING)
+        print("    読込完了:" + FILE_PATH_SETTING)
         
-        with open(FILE_NAME_SETTING) as f:
+        with open(FILE_PATH_SETTING, encoding='utf-8') as f:
             self.setting = json.load(f)
         
         print("------------------------------------------------------")
         print("  MicrosoftEdge起動")
         print("    環境によっては1分程度時間がかかる場合があります")
-        
-        self.driver = webdriver.Edge()
+
+        # 実行環境のEdgeバージョンに対応するWebDriverを自動取得して起動する
+        service = Service(EdgeChromiumDriverManager().install())
+        self.driver = webdriver.Edge(service=service)
         
         print("  Web明細に接続")
         print("    URL:" + self.setting['url'])
@@ -56,8 +67,9 @@ class SalarySlipScraper():
         
         print("------------------------------------------------------")
         print("  MicrosoftEdge終了")
-        
-        self.driver.quit()
+
+        if hasattr(self, 'driver'):
+            self.driver.quit()
         
         print("  Enterを押して終了")
         input("    - Press Enter Key -")
@@ -111,7 +123,7 @@ class SalarySlipScraper():
             print("------------------------------------------------------")
             print("  Web明細への接続に失敗")
             print("  ウェブサイトのサービス提供状態もしくは")
-            print("  " + FILE_NAME_SETTING + "のURLを確認してください")
+            print("  " + FILE_PATH_SETTING + "のURLを確認してください")
             
             return False
     
@@ -220,9 +232,9 @@ class SalarySlipScraper():
         print("------------------------------------------------------")
         print("  出力済み明細のcsvを取得")
         
-        if os.path.exists(FILE_NAME_CSV):
+        if os.path.exists(FILE_PATH_CSV):
             
-            data_frame = pandas.read_csv(FILE_NAME_CSV, encoding='utf-8_sig')
+            data_frame = pandas.read_csv(FILE_PATH_CSV, encoding='utf-8_sig')
             
             # 各行を1行ずつデータフレームとして処理
             for index, row in data_frame.iterrows():
@@ -234,17 +246,17 @@ class SalarySlipScraper():
                 
                 self.slips[slip.key] = slip
                 
-            print("    取得完了:" + FILE_NAME_CSV)
+            print("    取得完了:" + FILE_PATH_CSV)
             
             # 取得したcsvは上書き出力されるため、バックアップフォルダにコピーを作成
-            if not os.path.exists(FOLDER_NAME_BACKUP):
-                os.mkdir(FOLDER_NAME_BACKUP)
-            shutil.copy(FILE_NAME_CSV, file_path_backup)
+            if not os.path.exists(FOLDER_PATH_BACKUP):
+                os.makedirs(FOLDER_PATH_BACKUP)
+            shutil.copy(FILE_PATH_CSV, file_path_backup)
             print("    複製完了:" + file_name_backup)
             
         else:
             
-            print("    取得失敗:" + FILE_NAME_CSV)
+            print("    取得失敗:" + FILE_PATH_CSV)
     
     def export_csv(self):
         """
@@ -260,8 +272,11 @@ class SalarySlipScraper():
         
         # 全明細のデータフレームを統合する
         concatenated_data_frame = pandas.concat(data_frames)
+
+        if not os.path.exists(os.path.dirname(FILE_PATH_CSV)):
+            os.makedirs(os.path.dirname(FILE_PATH_CSV))
         
         # データフレームをcsv出力する
-        concatenated_data_frame.to_csv(FILE_NAME_CSV, index = False, encoding='utf-8_sig')
+        concatenated_data_frame.to_csv(FILE_PATH_CSV, index = False, encoding='utf-8_sig')
         
-        print("    出力完了:" + FILE_NAME_CSV )
+        print("    出力完了:" + FILE_PATH_CSV )
